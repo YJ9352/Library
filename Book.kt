@@ -1,4 +1,4 @@
 package library
 
-class Book {
+class Book() {
 }

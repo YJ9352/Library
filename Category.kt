@@ -1,24 +1,34 @@
 package library
 
-open class Category(var bookName: String, var description: String, var idx: Int) {
-// 위처럼 쓸 경우 아래 생략 가능하다고 함
-//    var idx: Int
-//    val bookName: String
-//    var description: String
-//
-//    init {
-//        this.idx = idx
-//        this.bookName = bookName
-//        this.description = description
-//    }
+open class Category(description: String) {
+    //open class Category(var idx: Int = genBookIdx(), var description: String)
+    // 위처럼 쓸 경우 아래 생략 가능하다고 함
+    // 그런데 여기에 쓰면 도서 카테고리 정보넣을때 Int 값도 직접 써줘야하는듯
+    // 그래서 기본 숫자 지정하고, 이후 자동 증가를 위해서 한꺼번에 안 쓰는걸지도
+
+    var idx: Int
+    var description: String
+
+    init {
+        this.idx = genBookIdx()
+        this.description = description
+    }
 
     fun displayInfo() { // 책 설명 출력
-        println("분류번호 : $idx, 도서명: $bookName, 도서분류: $description")
+        println("분류번호 : $idx, 도서분류: $description")
     }
 
     // 인덱스 값 지정
     companion object {
-        private var
-    }
+        // 기본값을 정하는 곳
+        private var bokIdx = 0
 
+        // 값 증가시키는 식
+        private fun genBookIdx(): Int {
+            bokIdx += 1000
+            return bokIdx
+        }
+        // for 문 안에서 step은 증가값 변경가능, 단 음수는 지원안함
+        // ++ 는 1 씩 증가시켜서 어떻게 해도 앞자리 지정이 안됐다
+    }
 }
